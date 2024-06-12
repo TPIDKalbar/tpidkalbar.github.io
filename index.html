@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Pelaporan Kegiatan TPID</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+    rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
+
+    body {
+      padding: 100px 0;
+      background: #ecf0f4;
+      width: 100%;
+      height: 100%;
+      font-size: 18px;
+      line-height: 1.5;
+      font-family: 'Roboto', sans-serif;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1230px;
+      width: 100%;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 45px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .header {
+      margin-bottom: 80px;
+    }
+
+    #description {
+      font-size: 24px;
+    }
+
+    .form-wrap {
+      background: rgba(255, 255, 255, 1);
+      width: 100%;
+      max-width: 850px;
+      padding: 50px;
+      margin: 0 auto;
+      position: relative;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-wrap:before {
+      content: "";
+      width: 90%;
+      height: calc(100% + 60px);
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      position: absolute;
+      top: -30px;
+      background: #00bcd9;
+      z-index: -1;
+      opacity: 0.8;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group>label {
+      display: block;
+      font-size: 18px;
+      color: #000;
+    }
+
+    .custom-control-label {
+      color: #000;
+      font-size: 16px;
+    }
+
+    .form-control {
+      height: 50px;
+      background: #ecf0f4;
+      border-color: transparent;
+      padding: 0 15px;
+      font-size: 16px;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .form-select {
+      height: 50px;
+      background: #ecf0f4;
+      border-color: transparent;
+      padding: 0 15px;
+      font-size: 16px;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+      border-color: #00bcd9;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+    }
+
+    .form-select:focus {
+      border-color: #00bcd9;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+    }
+
+    textarea.form-control {
+      height: 160px;
+      padding-top: 15px;
+      resize: none;
+    }
+
+    .btn {
+      padding: .657rem .75rem;
+      font-size: 18px;
+      letter-spacing: 0.050em;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: #00bcd9;
+      border-color: #00bcd9;
+    }
+
+    .btn-primary:hover {
+      color: #00bcd9;
+      background-color: #ffffff;
+      border-color: #00bcd9;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+    }
+
+    .btn-primary:focus,
+    .btn-primary.focus {
+      color: #00bcd9;
+      background-color: #ffffff;
+      border-color: #00bcd9;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+    }
+
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .show>.btn-primary.dropdown-toggle {
+      color: #00bcd9;
+      background-color: #ffffff;
+      border-color: #00bcd9;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled):active:focus,
+    .btn-primary:not(:disabled):not(.disabled).active:focus,
+    .show>.btn-primary.dropdown-toggle:focus {
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+    }
+
+    td input {
+      min-width: 200px;
+    }
+
+    .error {
+      border: 2px solid red;
+    }
+
+    .dropdown-input {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <header class="header">
+      <h1 id="title" class="text-center">Form Pelaporan Kegiatan TPID</h1>
+      <p id="description" class="text-center">
+        Provinsi Kalimantan Barat
+      </p>
+    </header>
+    <div class="form-wrap">
+      <div class="container mt-5">
+        <form id="phoneForm" class="needs-validation" novalidate>
+
+          <!-- Periode -->
+          <h1>Pelaporan Periode</h1>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="month" class="form-label">Bulan</label>
+              <select class="form-select" id="monthselect" required>
+                <option value="">Pilih Bulan</option>
+                <option value="Januari">Januari</option>
+                <option value="Februari">Februari</option>
+                <option value="Maret">Maret</option>
+                <option value="April">April</option>
+                <option value="Mei">Mei</option>
+                <option value="Juni">Juni</option>
+                <option value="Juli">Juli</option>
+                <option value="Agustus">Agustus</option>
+                <option value="September">September</option>
+                <option value="Oktober">Oktober</option>
+                <option value="November">November</option>
+                <option value="Desember">Desember</option>
+              </select>
+              <div class="invalid-feedback">
+                Silakan pilih bulan.
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="year" class="form-label">Tahun</label>
+              <select class="form-select" id="yearselect" required>
+                <option value="">Pilih Tahun</option>
+                <!-- Tahun akan diisi oleh JavaScript -->
+              </select>
+              <div class="invalid-feedback">
+                Silakan pilih tahun.
+              </div>
+            </div>
+          </div>
+          <!-- End Periode -->
+
+          <div class="mb-3">
+            <label for="namapic" class="form-label">Nama PIC</label>
+            <input type="text" class="form-control" id="namapic" name="namapic" placeholder="" required>
+            <div class="invalid-feedback">
+              Mohon untuk diisi.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Nomor Handphone</label>
+            <input type="tel" class="form-control" id="phone" name="nohp" placeholder="08xx-xxxx-xxxx"
+              pattern="^08\d{8,11}$" required>
+            <div class="invalid-feedback">
+              Masukkan nomor handphone yang valid (harus dimulai dengan 08 dan terdiri dari 10 hingga 13 angka).
+            </div>
+          </div>
+
+
+          <div class="mb-3">
+            <label for="kabupatenKota" class="form-label">Kabupaten/Kota</label>
+            <select class="form-select" id="kabupatenKota" name="wilayah" required>
+              <option value="" disabled selected>Pilih Kabupaten/Kota</option>
+            </select>
+            <div class="invalid-feedback">
+              Silahkan pilih wilayah pelaksanaan.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="datepicker" class="form-label">Tanggal pelaksanaan OP/ GPM</label>
+            <input type="text" class="form-control" id="datepicker" name="tanggal" placeholder="Pilih tanggal" required>
+            <div class="invalid-feedback">
+              Mohon pilih tanggal pelaksanaan.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="lokasi" class="form-label">Lokasi Penyelenggaraan GPM/ OP</label>
+            <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="" required>
+            <div class="invalid-feedback">
+              Mohon untuk diisi.
+            </div>
+          </div>
+
+          <div class="container mt-5">
+            <h1>Daftar Komoditas Pada GPM/OP</h1>
+
+            <div style="overflow: auto;">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Komoditas</th>
+                    <th>Volume</th>
+                    <th>Satuan</th>
+                    <th>Harga Komoditas</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="formTable">
+                  <tr>
+                    <td>
+                      <div class="dropdown-input">
+                        <input type="text" class="form-control" name="komoditas[]" placeholder="Komoditas" required>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Beras</a></li>
+                          <li><a class="dropdown-item" href="#">Cabe Merah</a></li>
+                          <li><a class="dropdown-item" href="#">Cabe Rawit</a></li>
+                          <li><a class="dropdown-item" href="#">Bawang Merah</a></li>
+                        </ul>
+                        <div class="invalid-feedback">
+                          Mohon untuk diisi.
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="volume[]" placeholder="Volume" required>
+                      <div class="invalid-feedback">
+                        Mohon untuk diisi.
+                      </div>
+                    </td>
+                    <td>
+                      <select class="form-select" name="satuan[]" required>
+                        <option value="" disabled selected>Pilih Satuan</option>
+                        <option value="Kg">Kg</option>
+                        <option value="Liter">Liter</option>
+                        <option value="Butir">Butir</option>
+                        <option value="Ikat">Ikat</option>
+                        <option value="Pax">Pax</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Mohon untuk diisi.
+                      </div>
+                    </td>
+                    <td>
+                      <input type="number" class="form-control" name="harga[]" placeholder="Harga" required>
+                      <div class="invalid-feedback">
+                        Mohon untuk diisi.
+                      </div>
+                    </td>
+                    <td><button class="btn btn-danger removeRow">Hapus</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button id="addRow" class="btn btn-primary mb-3">Tambah Komoditas</button>
+            <!-- <button id="convertToJson" class="btn btn-success mb-3">Konversi ke JSON</button> -->
+            <div id="jsonOutput" class="mt-3"></div>
+          </div>
+        </form>
+        <div class="d-grid gap-2">
+          <button id="kirim-laporan" class="btn btn-success mb-3">Kirim Laporan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+  <script>
+    function sendData(formData) {
+      var queryString = $.param(formData);
+
+      var data = encodeURI(queryString);
+
+      console.log(data)
+
+      $.get('https://script.google.com/macros/s/AKfycbxUfpArjkgIbcAMUPYv-qtyfvLVhPOJw5hJzKQ7J9QD1y4ZB2O5_YyRM845Xqfvl-bznQ/exec?a=insert&', queryString, function (data) {
+        // $('#phoneForm').reset();
+        alert('Sukses mengirim laporan');
+        location.reload();
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.error('Error:', textStatus, errorThrown);
+      });
+    }
+    const kabupatenKota = [
+      "Kabupaten Bengkayang",
+      "Kabupaten Kapuas Hulu",
+      "Kabupaten Kayong Utara",
+      "Kabupaten Ketapang",
+      "Kabupaten Kubu Raya",
+      "Kabupaten Landak",
+      "Kabupaten Melawi",
+      "Kabupaten Mempawah",
+      "Kabupaten Sambas",
+      "Kabupaten Sanggau",
+      "Kabupaten Sekadau",
+      "Kabupaten Sintang",
+      "Kota Pontianak",
+      "Kota Singkawang"
+    ];
+
+    const dropdown = document.getElementById('kabupatenKota');
+
+    kabupatenKota.forEach(function (kab) {
+      const option = document.createElement('option');
+      option.value = kab;
+      option.textContent = kab;
+      dropdown.appendChild(option);
+    });
+
+    async function checkValidity() {
+      await this.updateComplete
+      return this.valueInput.checkValidity();
+    }
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+      var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      var results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    function setdatePickerByUrl(year, month) {
+
+
+      if (month && year) {
+        var months = {
+          "januari": "01",
+          "februari": "02",
+          "maret": "03",
+          "april": "04",
+          "mei": "05",
+          "juni": "06",
+          "juli": "07",
+          "agustus": "08",
+          "september": "09",
+          "oktober": "10",
+          "november": "11",
+          "desember": "12"
+        };
+        $('#datepicker').datepicker('update', new Date(year, months[month.toLowerCase()] - 1));
+      }
+    }
+
+    function formToJSON(form) {
+      var formArray = $(form).serializeArray();
+      var formData = {};
+
+      $.map(formArray, function (n, i) {
+        formData[n['name']] = n['value'];
+      });
+
+      return formData;
+    }
+
+    $(document).ready(function () {
+      $('#datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        todayHighlight: true,
+        autoclose: true
+      });
+
+      var startYear = 2020;
+      var endYear = new Date().getFullYear();
+      var yearSelect = $('#yearselect');
+
+      for (var year = startYear; year <= endYear; year++) {
+        yearSelect.append(new Option(year, year));
+      }
+
+      // Set month and year from URL parameters
+      var urlMonth = getUrlParameter('bulan');
+      var urlYear = getUrlParameter('tahun');
+
+
+      if (urlMonth) {
+        $('#monthselect').val(urlMonth).change();
+      }
+      if (urlYear) {
+        $('#yearselect').val(urlYear).change();
+      }
+
+      if (urlMonth && urlYear) {
+        setdatePickerByUrl(urlYear, urlMonth)
+      }
+
+      // Initialize Bootstrap Datepicker
+      $('#monthselect, #yearselect').change(function () {
+        var month = $('#monthselect').val();
+        var year = $('#yearselect').val();
+        setdatePickerByUrl(year, month)
+      });
+
+
+      var form = $('#phoneForm');
+
+      function cleanPhoneNumber() {
+        var phoneInput = $('#phone');
+        var phoneValue = phoneInput.val();
+        phoneValue = phoneValue.replace(/[-\s+]/g, ''); // Remove -, spaces, and +
+        if (phoneValue.startsWith('62')) {
+          phoneValue = '0' + phoneValue.slice(2); // Replace +62 with 0
+        }
+        phoneInput.val(phoneValue);
+      }
+
+      $('#phone').on('input', function () {
+        cleanPhoneNumber();
+        if (!form[0].checkValidity()) {
+          form.addClass('was-validated');
+        } else {
+          form.removeClass('was-validated');
+        }
+      });
+
+      form.on('submit', function (event) {
+        cleanPhoneNumber();
+        if (!form[0].checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        form.addClass('was-validated');
+      });
+
+      $('#kirim-laporan').click(function () {
+        if (form[0].checkValidity()) {
+          var formDataJson = formToJSON(form);
+          var tableDataJson = getjson();
+          delete formDataJson['harga[]'];
+          delete formDataJson['volume[]'];
+          delete formDataJson['satuan[]'];
+          delete formDataJson['komoditas[]'];
+          formDataJson['datakomoditas'] = JSON.stringify(tableDataJson);
+          console.log(formDataJson);
+          sendData(formDataJson)
+          form.removeClass('was-validated');
+        } else {
+          form.addClass('was-validated');
+        }
+
+      })
+
+      // Tabel control
+      $('#addRow').click(function () {
+        $('#formTable').append(`
+              <tr>
+                  <td>
+                      <div class="dropdown-input">
+                          <input type="text" class="form-control" name="komoditas[]" placeholder="Komoditas" required>
+                          <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">Beras</a></li>
+                              <li><a class="dropdown-item" href="#">Cabe Merah</a></li>
+                              <li><a class="dropdown-item" href="#">Cabe Rawit</a></li>
+                              <li><a class="dropdown-item" href="#">Bawang Merah</a></li>
+                          </ul>
+                          <div class="invalid-feedback">
+                            Mohon untuk diisi.
+                          </div>
+                      </div>
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" name="volume[]" placeholder="Volume" required>
+                      <div class="invalid-feedback">
+                        Mohon untuk diisi.
+                      </div>
+                  </td>
+                  <td>
+                      <select class="form-select" name="satuan[]" required>
+                        <option value="" disabled selected>Pilih Satuan</option>
+                        <option value="Kg">Kg</option>
+                        <option value="Liter">Liter</option>
+                        <option value="Butir">Butir</option>
+                        <option value="Ikat">Ikat</option>
+                        <option value="Pax">Pax</option>
+                      </select>
+                      <div class="invalid-feedback">
+                        Mohon untuk diisi.
+                      </div>
+                    </td>
+                  <td>
+                      <input type="number" class="form-control" name="harga[]"  placeholder="Harga" required>
+                      <div class="invalid-feedback">
+                        Mohon untuk diisi.
+                      </div>
+                  </td>
+                  <td><button class="btn btn-danger removeRow">Hapus</button></td>
+              </tr>
+          `);
+      });
+
+      // Fungsi untuk menghapus baris
+      $(document).on('click', '.removeRow', function () {
+        $(this).closest('tr').remove();
+      });
+
+      // Fungsi untuk mengubah table menjadi JSON
+      $('#convertToJson').click(function () {
+        const result = getjson()
+        $('#jsonOutput').text(JSON.stringify(result, null, 4));
+      });
+
+      function getjson() {
+        var komoditas = $("input[name='komoditas[]']").map(function () {return $(this).val();}).get();
+        var volume = $("input[name='volume[]']").map(function () {return $(this).val();}).get();
+        var satuan = $("select[name='satuan[]']").map(function () {return $(this).val();}).get();
+        var harga = $("input[name='harga[]']").map(function () {return $(this).val();}).get();
+        var result = [];
+
+        for (var i = 0; i < komoditas.length; i++) {
+          result.push({
+            komoditas: komoditas[i],
+            volume: volume[i],
+            satuan: satuan[i],
+            harga: harga[i]
+          });
+        }
+        return result
+      }
+
+      $(document).on('focus', 'input[name="komoditas[]"]', function () {
+        $(this).next('.dropdown-menu').addClass('show');
+      });
+
+      // $(document).on('blur', 'input[name="komoditas[]"]', function() {
+      //   var $menu = $(this).next('.dropdown-menu');
+      //   setTimeout(function() {
+      //     $menu.removeClass('show');
+      //   }, 200);
+      // });
+
+      $(document).on('click', '.dropdown-item', function (e) {
+        e.preventDefault();
+        var value = $(this).text();
+        $(this).closest('.dropdown-input').find('input[name="komoditas[]"]').val(value);
+        $(this).closest('.dropdown-menu').removeClass('show');
+      });
+
+      $(document).on('input', 'input[name="komoditas[]"]', function () {
+        var filter = $(this).val().toLowerCase();
+        var $menu = $(this).next('.dropdown-menu');
+        $menu.find('li').each(function () {
+          var text = $(this).text().toLowerCase();
+          $(this).toggle(text.indexOf(filter) > -1);
+        });
+      });
+
+    });
+  </script>
+</body>
+
+</html>
