@@ -12,6 +12,7 @@
     rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeGLv4pAAAAAIPq8fBwpcmE7fzCE16JlQVyIwwp"></script>
   <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap');
 
@@ -538,6 +539,7 @@
       });
 
       $('#kirim-laporan').click(function () {
+
         if (form[0].checkValidity()) {
           var formDataJson = formToJSON(form);
           var tableDataJson = getjson();
@@ -547,8 +549,15 @@
           delete formDataJson['komoditas[]'];
           formDataJson['datakomoditas'] = JSON.stringify(tableDataJson);
           console.log(formDataJson);
-          sendData(formDataJson)
-          form.removeClass('was-validated');
+          
+
+          e.preventDefault();
+          grecaptcha.ready(function() {
+            grecaptcha.execute('reCAPTCHA_site_key', {action: 'submit'}).then(function(token) {
+                sendData(formDataJson)
+                form.removeClass('was-validated');
+            });
+          });
         } else {
           form.addClass('was-validated');
         }
