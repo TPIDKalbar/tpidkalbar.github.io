@@ -549,15 +549,17 @@
           delete formDataJson['komoditas[]'];
           formDataJson['datakomoditas'] = JSON.stringify(tableDataJson);
           console.log(formDataJson);
+          sendData(formDataJson)
+          form.removeClass('was-validated');
           
 
-          e.preventDefault();
-          grecaptcha.ready(function() {
-            grecaptcha.execute('reCAPTCHA_site_key', {action: 'submit'}).then(function(token) {
-                sendData(formDataJson)
-                form.removeClass('was-validated');
-            });
-          });
+          // e.preventDefault();
+          // grecaptcha.ready(function() {
+          //   grecaptcha.execute('reCAPTCHA_site_key', {action: 'submit'}).then(function(token) {
+          //       sendData(formDataJson)
+          //       form.removeClass('was-validated');
+          //   });
+          // });
         } else {
           form.addClass('was-validated');
         }
