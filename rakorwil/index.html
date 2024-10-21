@@ -3,49 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda Kegiatan</title>
+    <title>Loading Agenda Kegiatan</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-family: Arial, sans-serif;
-            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .spinner-container {
+            text-align: center;
+        }
+
+        .spinner {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         h1 {
-            text-align: center;
-            padding: 20px;
             font-size: 24px;
+            color: #333;
+            margin-top: 20px;
         }
 
-        .pdf-container {
-            width: 100%;
-            height: calc(100% - 80px); /* Menyisakan ruang untuk judul */
-        }
-
-        .pdf-container embed {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Responsif untuk mobile */
         @media screen and (max-width: 768px) {
             h1 {
                 font-size: 18px;
             }
 
-            .pdf-container {
-                height: calc(100% - 60px); /* Menyesuaikan ruang untuk judul di mobile */
+            .spinner {
+                width: 80px;
+                height: 80px;
+                border-width: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Agenda Kegiatan</h1>
-    <div class="pdf-container">
-        <embed src="https://tpidkalbar.github.io/rakorwil/agenda.pdf" type="application/pdf" title="Agenda Kegiatan">
+
+    <div class="spinner-container">
+        <div class="spinner"></div>
+        <h1>Agenda Kegiatan Rakorwil Se-Kalimantan 2024</h1>
     </div>
+
+    <script>
+        // Mengalihkan halaman setelah 3 detik
+        setTimeout(function() {
+            window.location.href = "https://tpidkalbar.github.io/rakorwil/agenda.pdf";
+        }, 3000);
+    </script>
+
 </body>
 </html>
