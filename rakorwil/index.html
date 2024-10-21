@@ -8,52 +8,44 @@
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
             height: 100%;
             font-family: Arial, sans-serif;
-        }
-
-        .container {
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
         }
 
         h1 {
             text-align: center;
-            margin: 0;
-            padding: 10px;
-            background-color: #f2f2f2;
+            padding: 20px;
+            font-size: 24px;
         }
 
         .pdf-container {
-            flex-grow: 1;
-            position: relative;
             width: 100%;
-            height: 100%;
+            height: calc(100% - 80px); /* Menyisakan ruang untuk judul */
         }
 
-        .pdf-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .pdf-container embed {
             width: 100%;
             height: 100%;
             border: none;
         }
+
+        /* Responsif untuk mobile */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 18px;
+            }
+
+            .pdf-container {
+                height: calc(100% - 60px); /* Menyesuaikan ruang untuk judul di mobile */
+            }
+        }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Agenda Kegiatan</h1>
-        <div class="pdf-container">
-            <!-- Ganti URL di bawah ini dengan link Google Drive PDF kamu -->
-            <iframe src="agenda.pdf" allowfullscreen></iframe>
-        </div>
+    <h1>Agenda Kegiatan</h1>
+    <div class="pdf-container">
+        <embed src="https://tpidkalbar.github.io/rakorwil/agenda.pdf" type="application/pdf" title="Agenda Kegiatan">
     </div>
-
 </body>
 </html>
