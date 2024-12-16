@@ -1,14 +1,144 @@
-<h1 id="kebijakan-privasi-aplikasi-kipas-kapuas">Kebijakan Privasi Aplikasi Kipas Kapuas</h1>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Kipas Kapuas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        .toc-link.active {
+            color: #0d6efd;
+            font-weight: bold;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: none;
+            z-index: 99;
+        }
+        .search-modal {
+            background-color: rgba(0,0,0,0.5);
+        }
+        .progress-wrapper {
+            height: 3px;
+            background-color: #e9ecef;
+        }
+        .sidebar {
+            height: calc(100vh - 56px);
+            position: sticky;
+            top: 56px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Search Modal -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pencarian</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="searchInput" class="form-control mb-3" placeholder="Ketik untuk mencari...">
+                    <div id="searchResults" class="list-group" style="max-height: 400px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://tpidkalbar.github.io/IMG_3132.PNG" alt="Logo" class="rounded-circle me-2">
+                Kipas Kapuas
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#kebijakan">Kebijakan Privasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#panduan">Panduan</a>
+                    </li>
+                </ul>
+                <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#searchModal">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-wrapper fixed-top" style="margin-top: 56px;">
+        <div id="readingProgress" class="progress-bar bg-primary" role="progressbar"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mt-5 pt-3">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="sidebar overflow-auto p-3 bg-white rounded shadow-sm">
+                    <h5 class="fw-bold mb-3">Daftar Isi</h5>
+                    <nav id="tableOfContents" class="nav flex-column"></nav>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="col-lg-9">
+                <!-- Section Navigation -->
+                <div class="btn-group w-100 mb-4">
+                    <button onclick="showSection('kebijakan')" class="btn btn-primary">
+                        <i class="fas fa-shield-alt me-2"></i>Kebijakan Privasi
+                    </button>
+                    <button onclick="showSection('faq')" class="btn btn-primary">
+                        <i class="fas fa-question-circle me-2"></i>FAQ
+                    </button>
+                    <button onclick="showSection('panduan')" class="btn btn-primary">
+                        <i class="fas fa-book me-2"></i>Panduan
+                    </button>
+                </div>
+
+                <!-- Content Sections -->
+                <div id="content-sections">
+                    <!-- Kebijakan Privasi -->
+                    <div id="kebijakan" class="content-section card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Kebijakan Privasi</h2>
+                            <h1 id="kebijakan-privasi-aplikasi-kipas-kapuas">Kebijakan Privasi Aplikasi Kipas Kapuas</h1>
 <p>Terakhir diperbarui: 16 Desember 2024</p>
 <h2 id="1-pendahuluan">1. Pendahuluan</h2>
-<p>Aplikasi Kipas Kapuas (&quot;kami,&quot; &quot;aplikasi,&quot; atau &quot;layanan&quot;) berkomitmen untuk melindungi privasi pengguna yang terdaftar. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda.</p>
-<h2 id="2-akses-terbatas">2. Akses Terbatas</h2>
-<p>Aplikasi Kipas Kapuas merupakan aplikasi terbatas yang hanya dapat diakses oleh pengguna yang telah terdaftar dan disetujui oleh Ketua TPID (Tim Pengendalian Inflasi Daerah) Kalimantan Barat. Aplikasi ini tidak tersedia untuk umum.</p>
+<p>Aplikasi Kipas Kapuas (&quot;kami,&quot; &quot;aplikasi,&quot; atau &quot;layanan&quot;) berkomitmen untuk melindungi privasi dan keamanan pengguna yang terdaftar. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda, serta langkah-langkah yang kami ambil untuk memastikan pengalaman yang aman bagi semua pengguna.</p>
+<h2 id="2-akses-terbatas-dan-verifikasi">2. Akses Terbatas dan Verifikasi</h2>
+<p>Aplikasi Kipas Kapuas merupakan aplikasi terbatas yang hanya dapat diakses oleh pengguna yang telah:</p>
+<ul>
+<li>Terverifikasi identitasnya secara resmi</li>
+<li>Disetujui oleh Ketua TPID Kalimantan Barat</li>
+<li>Menyetujui pedoman keamanan dan penggunaan yang bertanggung jawab</li>
+<li>Memenuhi persyaratan usia minimum 18 tahun</li>
+</ul>
 <h2 id="3-informasi-yang-kami-kumpulkan">3. Informasi yang Kami Kumpulkan</h2>
 <p>Kami mengumpulkan informasi berikut:</p>
 <ul>
 <li>Data profil pengguna (nama, jabatan, instansi)</li>
 <li>Informasi kontak (nomor telepon WhatsApp, email)</li>
+<li>Dokumen verifikasi identitas resmi</li>
+<li>Data perangkat dan log keamanan</li>
 </ul>
 <h2 id="4-penggunaan-informasi">4. Penggunaan Informasi</h2>
 <p>Informasi yang dikumpulkan digunakan untuk:</p>
@@ -16,48 +146,463 @@
 <li>Mengoperasikan sistem peringatan dini (early warning system)</li>
 <li>Mengelola fitur call for meeting</li>
 <li>Mengintegrasikan dengan panggilan video WhatsApp</li>
-<li>Memverifikasi identitas pengguna</li>
-<li>Meningkatkan keamanan dan kinerja aplikasi</li>
+<li>Memverifikasi dan mengautentikasi identitas pengguna</li>
+<li>Mendeteksi dan mencegah aktivitas yang mencurigakan</li>
+<li>Melindungi keamanan pengguna dan integritas aplikasi</li>
 </ul>
-<h2 id="5-integrasi-whatsapp">5. Integrasi WhatsApp</h2>
-<p>Aplikasi kami terintegrasi dengan WhatsApp untuk fitur video call. Perlu diketahui:</p>
+<h2 id="5-integrasi-whatsapp-dan-keamanan-komunikasi">5. Integrasi WhatsApp dan Keamanan Komunikasi</h2>
+<p>Aplikasi kami terintegrasi dengan WhatsApp untuk fitur video call dengan protokol keamanan berikut:</p>
 <ul>
-<li>Link video call dibagikan melalui aplikasi</li>
-<li>Panggilan video dilakukan melalui platform WhatsApp</li>
-<li>Kebijakan privasi WhatsApp berlaku saat menggunakan fitur video call</li>
+<li>Verifikasi identitas sebelum bergabung dalam panggilan</li>
+<li>Enkripsi end-to-end untuk semua komunikasi</li>
+<li>Pembatasan akses hanya untuk peserta yang diizinkan</li>
+<li>Pemantauan aktivitas mencurigakan secara real-time</li>
+<li>Mekanisme pelaporan untuk konten atau perilaku yang tidak pantas</li>
 </ul>
-<h2 id="6-keamanan-data">6. Keamanan Data</h2>
+<h2 id="6-keamanan-data-dan-perlindungan-pengguna">6. Keamanan Data dan Perlindungan Pengguna</h2>
 <p>Kami menerapkan langkah-langkah keamanan berikut:</p>
 <ul>
 <li>Enkripsi data end-to-end</li>
-<li>Autentikasi dua faktor</li>
-<li>Pemantauan akses secara berkala</li>
+<li>Autentikasi dua faktor wajib</li>
+<li>Pemantauan akses secara real-time</li>
+<li>Sistem deteksi ancaman otomatis</li>
+<li>Verifikasi perangkat terdaftar</li>
 <li>Pembatasan akses berdasarkan otorisasi</li>
-<li>Backup data secara berkala</li>
+<li>Backup data terenkripsi</li>
+<li>Protokol penanganan insiden keamanan</li>
 </ul>
 <h2 id="7-penyimpanan-dan-penghapusan-data">7. Penyimpanan dan Penghapusan Data</h2>
 <ul>
-<li>Data disimpan selama pengguna masih terdaftar aktif</li>
-<li>Data akan dihapus ketika pengguna tidak lagi memiliki akses yang sah</li>
-<li>Backup data disimpan maksimal 30 hari</li>
+<li>Data disimpan dengan enkripsi tingkat tinggi</li>
+<li>Log keamanan disimpan untuk audit</li>
+<li>Data dihapus secara aman ketika tidak lagi diperlukan</li>
+<li>Backup data terenkripsi disimpan maksimal 30 hari</li>
+<li>Penghapusan otomatis data tidak aktif</li>
 </ul>
-<h2 id="8-hak-pengguna">8. Hak Pengguna</h2>
-<p>Pengguna terdaftar memiliki hak untuk:</p>
+<h2 id="8-hak-dan-tanggung-jawab-pengguna">8. Hak dan Tanggung Jawab Pengguna</h2>
+<p>Pengguna terdaftar memiliki:</p>
+<p>Hak:</p>
 <ul>
-<li>Mengakses data pribadi mereka</li>
+<li>Mengakses dan mengontrol data pribadi mereka</li>
 <li>Meminta koreksi data yang tidak akurat</li>
-<li>Meminta penghapusan data ketika tidak lagi aktif</li>
-<li>Mendapatkan informasi tentang penggunaan data mereka</li>
+<li>Melaporkan aktivitas mencurigakan</li>
+<li>Memblokir pengguna yang mencurigakan</li>
+<li>Mendapatkan notifikasi tentang masalah keamanan</li>
 </ul>
-<h2 id="9-pembagian-informasi">9. Pembagian Informasi</h2>
-<p>Kami tidak membagikan informasi pengguna kepada pihak ketiga kecuali:</p>
+<p>Tanggung Jawab:</p>
+<ul>
+<li>Menjaga kerahasiaan kredensial akun</li>
+<li>Melaporkan aktivitas mencurigakan</li>
+<li>Mengikuti pedoman keamanan aplikasi</li>
+<li>Menghormati privasi pengguna lain</li>
+</ul>
+<h2 id="9-pembagian-informasi-dan-keamanan">9. Pembagian Informasi dan Keamanan</h2>
+<p>Kami tidak membagikan informasi pengguna kecuali:</p>
 <ul>
 <li>Diperlukan untuk integrasi dengan WhatsApp</li>
 <li>Diwajibkan oleh hukum atau regulasi</li>
+<li>Diperlukan untuk menangani ancaman keamanan</li>
 <li>Atas permintaan resmi dari TPID Kalimantan Barat</li>
+<li>Untuk melindungi keselamatan pengguna</li>
 </ul>
-<h2 id="10-perubahan-kebijakan-privasi">10. Perubahan Kebijakan Privasi</h2>
-<p>Kami berhak mengubah kebijakan privasi ini sewaktu-waktu. Perubahan akan diberitahukan melalui aplikasi dan/atau email kepada pengguna terdaftar.</p>
-<h2 id="11-kontak">11. Kontak</h2>
-<p>Untuk pertanyaan tentang kebijakan privasi ini, silakan hubungi:
-Administrator TPID Kalimantan Barat melalui ketua Tim Pengendalian Inflasi Daerah Kalimantan Barat pada email krisna.prihadiyanto@outlook.com
+<h2 id="10-pemantauan-dan-pelaporan">10. Pemantauan dan Pelaporan</h2>
+<p>Kami menerapkan sistem:</p>
+<ul>
+<li>Pemantauan aktivitas mencurigakan 24/7</li>
+<li>Mekanisme pelaporan dalam aplikasi</li>
+<li>Respons cepat terhadap laporan keamanan</li>
+<li>Evaluasi berkala risiko keamanan</li>
+<li>Audit keamanan rutin</li>
+</ul>
+<h2 id="11-perubahan-kebijakan-privasi">11. Perubahan Kebijakan Privasi</h2>
+<p>Kami berhak mengubah kebijakan privasi ini dengan pemberitahuan minimal 30 hari sebelumnya. Perubahan akan diberitahukan melalui:</p>
+<ul>
+<li>Notifikasi dalam aplikasi</li>
+<li>Email kepada pengguna terdaftar</li>
+<li>Pengumuman di portal admin TPID</li>
+</ul>
+<h2 id="12-kontak-keamanan-dan-dukungan">12. Kontak Keamanan dan Dukungan</h2>
+<p>Untuk masalah keamanan atau pertanyaan tentang kebijakan privasi, silakan hubungi:</p>
+<ul>
+<li>Administrator TPID Kalimantan Barat</li>
+<li>Email: krisna.prihadiyanto@outlook.com</li>
+<li>Saluran Darurat Keamanan: [nomor hotline]</li>
+<li>Portal Pelaporan Insiden: [URL portal]</li>
+</ul>
+
+                        </div>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div id="faq" class="content-section card mb-4 d-none">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">FAQ</h2>
+                            <div class="accordion" id="faqAccordion">
+                                <h1 id="faq-frequently-asked-questions-aplikasi-kipas-kapuas">FAQ (Frequently Asked Questions) Aplikasi Kipas Kapuas</h1>
+<h2 id="umum">Umum</h2>
+<h3 id="apa-itu-aplikasi-kipas-kapuas-">Apa itu Aplikasi Kipas Kapuas?</h3>
+<p>Kipas Kapuas adalah aplikasi sistem peringatan dini terbatas yang digunakan oleh Tim Pengendalian Inflasi Daerah (TPID) Kalimantan Barat untuk koordinasi dan pemantauan.</p>
+<h3 id="siapa-yang-dapat-menggunakan-aplikasi-ini-">Siapa yang dapat menggunakan aplikasi ini?</h3>
+<p>Aplikasi ini hanya dapat digunakan oleh anggota TPID Kalimantan Barat yang telah terverifikasi dan disetujui oleh Ketua TPID.</p>
+<h3 id="bagaimana-cara-mendapatkan-akses-ke-aplikasi-">Bagaimana cara mendapatkan akses ke aplikasi?</h3>
+<p>Akses diberikan melalui proses verifikasi resmi oleh administrator TPID Kalimantan Barat. Hubungi ketua TPID untuk informasi lebih lanjut.</p>
+<h2 id="akun-keamanan">Akun &amp; Keamanan</h2>
+<h3 id="bagaimana-cara-mendaftar-">Bagaimana cara mendaftar?</h3>
+<p>Pendaftaran dilakukan melalui administrator TPID dengan menyertakan:</p>
+<ul>
+<li>Surat penugasan resmi</li>
+<li>Dokumen identitas</li>
+<li>Nomor WhatsApp aktif</li>
+<li>Email resmi instansi</li>
+</ul>
+<h3 id="bagaimana-jika-saya-lupa-password-">Bagaimana jika saya lupa password?</h3>
+<ul>
+<li>Klik &quot;Lupa Password&quot; di halaman login</li>
+<li>Masukkan email terdaftar</li>
+<li>Ikuti instruksi reset password yang dikirim ke email</li>
+</ul>
+<h3 id="bagaimana-cara-mengaktifkan-autentikasi-dua-faktor-">Bagaimana cara mengaktifkan autentikasi dua faktor?</h3>
+<ol>
+<li>Buka Pengaturan Akun</li>
+<li>Pilih &quot;Keamanan&quot;</li>
+<li>Aktifkan &quot;Verifikasi Dua Langkah&quot;</li>
+<li>Ikuti panduan pengaturan</li>
+</ol>
+<h2 id="fitur-aplikasi">Fitur Aplikasi</h2>
+<h3 id="bagaimana-cara-menggunakan-fitur-call-for-meeting-">Bagaimana cara menggunakan fitur call for meeting?</h3>
+<ol>
+<li>Buka menu &quot;Meeting&quot;</li>
+<li>Pilih &quot;Buat Meeting Baru&quot;</li>
+<li>Isi detail meeting (waktu, agenda, peserta)</li>
+<li>Kirim undangan</li>
+</ol>
+<h3 id="bagaimana-cara-bergabung-dengan-video-call-">Bagaimana cara bergabung dengan video call?</h3>
+<ol>
+<li>Klik link meeting di notifikasi</li>
+<li>Pilih &quot;Gabung via WhatsApp&quot;</li>
+<li>Konfirmasi izin akses WhatsApp</li>
+<li>Tunggu host memulai meeting</li>
+</ol>
+<h3 id="apa-yang-harus-dilakukan-jika-terjadi-gangguan-teknis-">Apa yang harus dilakukan jika terjadi gangguan teknis?</h3>
+<ul>
+<li>Periksa koneksi internet</li>
+<li>Tutup dan buka kembali aplikasi</li>
+<li>Hubungi support teknis jika masalah berlanjut</li>
+</ul>
+<h2 id="privasi-data">Privasi &amp; Data</h2>
+<h3 id="apakah-data-saya-aman-">Apakah data saya aman?</h3>
+<p>Ya, kami menggunakan enkripsi end-to-end dan protokol keamanan tingkat tinggi untuk melindungi data pengguna.</p>
+<h3 id="berapa-lama-data-saya-disimpan-">Berapa lama data saya disimpan?</h3>
+<p>Data aktif disimpan selama Anda menjadi pengguna terdaftar. Backup data disimpan maksimal 30 hari.</p>
+<h3 id="bagaimana-cara-menghapus-akun-">Bagaimana cara menghapus akun?</h3>
+<p>Hubungi administrator TPID untuk proses penghapusan akun dan data terkait.</p>
+<h2 id="dukungan-teknis">Dukungan Teknis</h2>
+<h3 id="bagaimana-cara-melaporkan-masalah-">Bagaimana cara melaporkan masalah?</h3>
+<ol>
+<li>Buka menu &quot;Bantuan&quot;</li>
+<li>Pilih &quot;Laporkan Masalah&quot;</li>
+<li>Isi formulir laporan</li>
+<li>Lampirkan screenshot jika ada</li>
+</ol>
+<h3 id="dimana-saya-bisa-mendapatkan-bantuan-tambahan-">Dimana saya bisa mendapatkan bantuan tambahan?</h3>
+<p>Hubungi:</p>
+<ul>
+<li>Email: krisna.prihadiyanto@outlook.com</li>
+<li>Portal Admin TPID</li>
+<li>Helpdesk: [nomor helpdesk]</li>
+</ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panduan -->
+                    <div id="panduan" class="content-section card mb-4 d-none">
+                        <div class="card-body">
+                            <h2 class="card-title mb-4">Panduan Pengguna</h2>
+                            <h1 id="panduan-pengguna-aplikasi-kipas-kapuas">Panduan Pengguna Aplikasi Kipas Kapuas</h1>
+<h2 id="1-memulai">1. Memulai</h2>
+<h3 id="1-1-persyaratan-sistem">1.1 Persyaratan Sistem</h3>
+<ul>
+<li>Android 8.0 atau lebih tinggi</li>
+<li>iOS 12.0 atau lebih tinggi</li>
+<li>Koneksi internet stabil</li>
+<li>WhatsApp terinstal</li>
+<li>Ruang penyimpanan minimal 100MB</li>
+</ul>
+<h3 id="1-2-instalasi">1.2 Instalasi</h3>
+<ol>
+<li>Unduh aplikasi melalui link yang diberikan administrator</li>
+<li>Ikuti proses instalasi</li>
+<li>Buka aplikasi</li>
+<li>Login dengan kredensial yang diberikan</li>
+</ol>
+<h3 id="1-3-pengaturan-awal">1.3 Pengaturan Awal</h3>
+<ol>
+<li>Ganti password default</li>
+<li>Aktifkan autentikasi dua faktor</li>
+<li>Verifikasi nomor WhatsApp</li>
+<li>Lengkapi profil pengguna</li>
+</ol>
+<h2 id="2-antarmuka-utama">2. Antarmuka Utama</h2>
+<h3 id="2-1-dashboard">2.1 Dashboard</h3>
+<ul>
+<li>Ringkasan status sistem</li>
+<li>Notifikasi penting</li>
+<li>Jadwal meeting mendatang</li>
+<li>Indikator peringatan dini</li>
+</ul>
+<h3 id="2-2-menu-utama">2.2 Menu Utama</h3>
+<ul>
+<li>Beranda</li>
+<li>Meeting</li>
+<li>Peringatan</li>
+<li>Laporan</li>
+<li>Pengaturan</li>
+<li>Bantuan</li>
+</ul>
+<h2 id="3-fitur-utama">3. Fitur Utama</h2>
+<h3 id="3-1-sistem-peringatan-dini">3.1 Sistem Peringatan Dini</h3>
+<h4 id="melihat-peringatan">Melihat Peringatan</h4>
+<ol>
+<li>Buka tab &quot;Peringatan&quot;</li>
+<li>Filter berdasarkan prioritas/wilayah</li>
+<li>Klik peringatan untuk detail</li>
+</ol>
+<h4 id="mengelola-peringatan">Mengelola Peringatan</h4>
+<ol>
+<li>Tandai status (Dibaca/Ditindaklanjuti)</li>
+<li>Tambah komentar</li>
+<li>Eskalasi ke tim terkait</li>
+</ol>
+<h3 id="3-2-call-for-meeting">3.2 Call for Meeting</h3>
+<h4 id="membuat-meeting">Membuat Meeting</h4>
+<ol>
+<li>Pilih &quot;Buat Meeting Baru&quot;</li>
+<li>Isi informasi meeting:<ul>
+<li>Judul</li>
+<li>Tanggal dan waktu</li>
+<li>Agenda</li>
+<li>Peserta</li>
+</ul>
+</li>
+<li>Kirim undangan</li>
+</ol>
+<h4 id="mengelola-meeting">Mengelola Meeting</h4>
+<ol>
+<li>Lihat daftar peserta</li>
+<li>Update agenda</li>
+<li>Kirim pengingat</li>
+<li>Bagikan dokumen</li>
+</ol>
+<h3 id="3-3-video-call-whatsapp">3.3 Video Call WhatsApp</h3>
+<h4 id="memulai-panggilan">Memulai Panggilan</h4>
+<ol>
+<li>Buka detail meeting</li>
+<li>Klik &quot;Mulai Video Call&quot;</li>
+<li>Pilih peserta</li>
+<li>Mulai panggilan</li>
+</ol>
+<h4 id="selama-panggilan">Selama Panggilan</h4>
+<ol>
+<li>Atur audio/video</li>
+<li>Bagikan layar</li>
+<li>Catat notulen</li>
+<li>Rekam meeting (jika diizinkan)</li>
+</ol>
+<h2 id="4-keamanan">4. Keamanan</h2>
+<h3 id="4-1-manajemen-password">4.1 Manajemen Password</h3>
+<ul>
+<li>Minimal 8 karakter</li>
+<li>Kombinasi huruf, angka, simbol</li>
+<li>Ganti setiap 90 hari</li>
+<li>Jangan bagikan password</li>
+</ul>
+<h3 id="4-2-verifikasi-dua-faktor">4.2 Verifikasi Dua Faktor</h3>
+<ol>
+<li>Buka Pengaturan</li>
+<li>Pilih &quot;Keamanan&quot;</li>
+<li>Aktifkan 2FA</li>
+<li>Simpan kode cadangan</li>
+</ol>
+<h2 id="5-pemeliharaan">5. Pemeliharaan</h2>
+<h3 id="5-1-update-aplikasi">5.1 Update Aplikasi</h3>
+<ul>
+<li>Periksa update secara berkala</li>
+<li>Aktifkan update otomatis</li>
+<li>Backup data sebelum update</li>
+</ul>
+<h3 id="5-2-pembersihan-data">5.2 Pembersihan Data</h3>
+<ul>
+<li>Hapus cache secara berkala</li>
+<li>Arsip meeting lama</li>
+<li>Kelola penyimpanan</li>
+</ul>
+<h2 id="6-pemecahan-masalah">6. Pemecahan Masalah</h2>
+<h3 id="6-1-masalah-umum">6.1 Masalah Umum</h3>
+<h4 id="aplikasi-lambat">Aplikasi Lambat</h4>
+<ol>
+<li>Periksa koneksi internet</li>
+<li>Bersihkan cache</li>
+<li>Restart aplikasi</li>
+</ol>
+<h4 id="error-login">Error Login</h4>
+<ol>
+<li>Periksa kredensial</li>
+<li>Reset password jika perlu</li>
+<li>Hubungi support</li>
+</ol>
+<h3 id="6-2-dukungan-teknis">6.2 Dukungan Teknis</h3>
+<ul>
+<li>Email: krisna.prihadiyanto@outlook.com</li>
+<li>Helpdesk: [nomor helpdesk]</li>
+<li>Portal Admin TPID</li>
+</ul>
+<h2 id="7-praktik-terbaik">7. Praktik Terbaik</h2>
+<h3 id="7-1-penggunaan-optimal">7.1 Penggunaan Optimal</h3>
+<ul>
+<li>Perbarui aplikasi secara rutin</li>
+<li>Gunakan koneksi internet stabil</li>
+<li>Tutup aplikasi jika tidak digunakan</li>
+<li>Backup data penting</li>
+</ul>
+<h3 id="7-2-etika-meeting">7.2 Etika Meeting</h3>
+<ul>
+<li>Tepat waktu</li>
+<li>Test audio/video sebelum meeting</li>
+<li>Gunakan headset</li>
+<li>Matikan mikrofon saat tidak berbicara</li>
+</ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-primary rounded-circle back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Kontak</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i>krisna.prihadiyanto@outlook.com</li>
+                        <li><i class="fas fa-phone me-2"></i>[Nomor Telepon]</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Kalimantan Barat</li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Link Cepat</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#kebijakan" class="text-light text-decoration-none">Kebijakan Privasi</a></li>
+                        <li><a href="#faq" class="text-light text-decoration-none">FAQ</a></li>
+                        <li><a href="#panduan" class="text-light text-decoration-none">Panduan Pengguna</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3">Tentang</h5>
+                    <p>Tim Pengendalian Inflasi Daerah Kalimantan Barat</p>
+                    <p class="mt-2">© 2024 Kipas Kapuas</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            searchResults.innerHTML = '';
+            
+            if (searchTerm.length < 2) return;
+
+            document.querySelectorAll('.content-section').forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    const matches = text.match(new RegExp(`.{0,50}${searchTerm}.{0,50}`, 'gi'));
+                    matches.forEach(match => {
+                        const a = document.createElement('a');
+                        a.className = 'list-group-item list-group-item-action';
+                        a.textContent = '...' + match + '...';
+                        a.onclick = () => {
+                            bootstrap.Modal.getInstance(document.getElementById('searchModal')).hide();
+                            showSection(section.id);
+                            section.scrollIntoView({ behavior: 'smooth' });
+                        };
+                        searchResults.appendChild(a);
+                    });
+                }
+            });
+        });
+
+        // Reading Progress
+        function updateReadingProgress() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / documentHeight) * 100;
+            document.getElementById('readingProgress').style.width = `${progress}%`;
+        }
+
+        // Back to Top
+        const backToTopButton = document.getElementById('backToTop');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+            updateReadingProgress();
+        };
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Section Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('d-none');
+            });
+            document.getElementById(sectionId).classList.remove('d-none');
+            updateTableOfContents();
+            window.location.hash = sectionId;
+        }
+
+        // Table of Contents
+        function updateTableOfContents() {
+            const toc = document.getElementById('tableOfContents');
+            toc.innerHTML = '';
+            
+            document.querySelectorAll('.content-section:not(.d-none) h2, .content-section:not(.d-none) h3').forEach((heading, index) => {
+                const link = document.createElement('a');
+                heading.id = `heading-${index}`;
+                link.href = `#heading-${index}`;
+                link.className = `nav-link ${heading.tagName === 'H3' ? 'ms-3' : ''}`;
+                link.textContent = heading.textContent;
+                toc.appendChild(link);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.slice(1) || 'kebijakan';
+            showSection(hash);
+        });
+    </script>
+</body>
+</html>
