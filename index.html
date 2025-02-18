@@ -337,6 +337,14 @@
           </div>
 
           <div class="mb-3">
+            <label for="instansi" class="form-label">Instansi</label>
+            <input type="text" class="form-control" id="instansi" name="instansi" placeholder="" required>
+            <div class="invalid-feedback">
+              Mohon untuk diisi.
+            </div>
+          </div>
+
+          <div class="mb-3">
             <label for="phone" class="form-label">Nomor Handphone</label>
             <input type="tel" class="form-control" id="phone" name="nohp" placeholder="08xx-xxxx-xxxx"
               pattern="^08\d{8,11}$" required>
@@ -369,6 +377,21 @@
             <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="" required>
             <div class="invalid-feedback">
               Mohon untuk diisi.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="sumberDana" class="form-label">Sumber Dana</label>
+            <div class="dropdown-input">
+              <input type="text" class="form-control" id="sumberDana" name="sumberDana" placeholder="Pilih atau ketik sumber dana" required>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">APBD/APBN</a></li>
+                <li><a class="dropdown-item" href="#">CSR</a></li>
+                <li><a class="dropdown-item" href="#">Kerjasama</a></li>
+              </ul>
+              <div class="invalid-feedback">
+                Mohon pilih atau isi sumber dana.
+              </div>
             </div>
           </div>
 
@@ -458,7 +481,6 @@
       console.log(data)
 
       $.get('https://script.google.com/macros/s/AKfycbxUfpArjkgIbcAMUPYv-qtyfvLVhPOJw5hJzKQ7J9QD1y4ZB2O5_YyRM845Xqfvl-bznQ/exec?a=insert&', queryString, function (data) {
-        // $('#phoneForm').reset();
         alert('Sukses mengirim laporan');
         location.reload();
       }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -748,6 +770,27 @@
       });
 
     });
+
+    // dropdown sumber dana
+    $(document).on('focus', '#sumberDana', function () {
+    $(this).next('.dropdown-menu').addClass('show');
+  });
+
+  $(document).on('click', '.dropdown-item', function (e) {
+    e.preventDefault();
+    var value = $(this).text();
+    $('#sumberDana').val(value);
+    $('.dropdown-menu').removeClass('show');
+  });
+
+  $(document).on('input', '#sumberDana', function () {
+    var filter = $(this).val().toLowerCase();
+    var $menu = $(this).next('.dropdown-menu');
+    $menu.find('li').each(function () {
+      var text = $(this).text().toLowerCase();
+      $(this).toggle(text.indexOf(filter) > -1);
+    });
+  });
   </script>
 </body>
 
