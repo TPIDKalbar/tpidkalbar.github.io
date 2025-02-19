@@ -270,6 +270,68 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        .menu-button-a {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            background-color: #00bcd9;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            width: 120px;
+            justify-content: center;
+        }
+        
+        .menu-button-a:hover {
+            background-color: #0097a7;
+            box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .menu-button-a:active {
+            transform: scale(0.95);
+        }
+        
+        .menu-button-a .menu-text {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .menu-button-a.clicked .menu-text {
+            opacity: 0;
+        }
+        
+        .menu-button-a .menu-icon {
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .menu-button-a.clicked .menu-icon {
+            opacity: 0;
+        }
+        
+        .menu-button-a::after {
+            content: "\F3D8";
+            font-family: "Bootstrap-Icons";
+            font-size: 20px;
+            color: white;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        .menu-button-a.clicked::after {
+            opacity: 1;
+            transform: scale(1);
+        }
   </style>
 </head>
 
@@ -278,6 +340,10 @@
   <button class="menu-button" id="menu-button" data-url="/laporan">
     <i class="bi bi-file-earmark-spreadsheet-fill menu-icon"></i>
     <span class="menu-text">Lihat Laporan</span>
+</button>
+<button class="menu-button-a" id="menu-button-a" data-url="/inflasi">
+    <i class="bi bi-graph-down menu-icon"></i>
+    <span class="menu-text">Data Inflasi</span>
 </button>
 
   <div class="container">
@@ -560,6 +626,14 @@
 
     $(document).ready(function () {
       $("#menu-button").click(function(){
+                var url = $(this).data("url");
+                $(this).addClass("clicked");
+                setTimeout(function(){
+                    window.location.href = url;
+                }, 3000);
+            });
+
+            $("#menu-button-a").click(function(){
                 var url = $(this).data("url");
                 $(this).addClass("clicked");
                 setTimeout(function(){
