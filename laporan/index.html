@@ -371,7 +371,19 @@
             const komoditas = data.datakomoditas;
             let komoditasRows = '';
             
-            komoditas.forEach(item => {
+            // komoditas.forEach(item => {
+            //     komoditasRows += `
+            //         <tr>
+            //             <td>${item.komoditas}</td>
+            //             <td>${formatNumber(item.volume)}</td>
+            //             <td>${item.satuan}</td>
+            //             <td>Rp ${formatNumber(item.harga)}</td>
+            //         </tr>
+            //     `;
+            // });
+
+            const komoditasArray = Array.isArray(komoditas) ? komoditas : Object.values(komoditas);
+            komoditasArray.forEach(item => {
                 komoditasRows += `
                     <tr>
                         <td>${item.komoditas}</td>
@@ -381,6 +393,7 @@
                     </tr>
                 `;
             });
+
 
             return `
                 <div class="col-12">
