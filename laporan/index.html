@@ -367,7 +367,8 @@
         }
 
         function createCard(data) {
-            const komoditas = JSON.parse(data.datakomoditas);
+            // const komoditas = JSON.parse(data.datakomoditas);
+            const komoditas = data.datakomoditas;
             let komoditasRows = '';
             
             komoditas.forEach(item => {
