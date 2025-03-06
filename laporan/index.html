@@ -404,7 +404,7 @@
                         </div>
                         <div class="card-body">
                             <p class="mb-1"><strong>Wilayah:</strong> ${data.wilayah}</p>
-                            <p class="mb-1"><strong>Tanggal:</strong> ${data.tanggal}</p>
+                            <p class="mb-1"><strong>Tanggal:</strong> ${parseTanggal(data.tanggal)}</p>
                             <p class="mb-3"><strong>Lokasi:</strong> ${data.lokasi}</p>
                             <p class="mb-3"><strong>Sumber Dana:</strong> ${data.sumberDana}</p>
                             
@@ -469,6 +469,35 @@
                 $('#cardContainer').html('<div class="col-12"><div class="alert alert-danger">Error loading data. Please try again later.</div></div>');
             });
     });
+
+    function parseTanggal(tanggalStr) {
+      if (!tanggalStr) return "Tanggal tidak tersedia"; // Jika data kosong/null
+
+      let date;
+
+      // Cek apakah formatnya "dd/mm/yyyy"
+      if (/^\d{2}\/\d{2}\/\d{4}$/.test(tanggalStr)) {
+          const [day, month, year] = tanggalStr.split('/').map(Number);
+          date = new Date(year, month - 1, day); // Perbaiki format ke yyyy-mm-dd
+      } else {
+          date = new Date(tanggalStr); // Coba parsing langsung jika bukan format "dd/mm/yyyy"
+      }
+
+      if (isNaN(date.getTime())) return "Format tanggal salah"; // Jika tanggal tidak valid
+
+      const hariIndo = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+      const bulanIndo = [
+          "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+          "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+
+      const hari = hariIndo[date.getDay()];
+      const tanggal = date.getDate().toString().padStart(2, '0');
+      const bulan = bulanIndo[date.getMonth()];
+      const tahun = date.getFullYear();
+
+      return `${hari}, ${tanggal} ${bulan} ${tahun}`;
+  }
 </script>
 </body>
 
