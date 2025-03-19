@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        textarea { width: 80%; height: 100px; margin-bottom: 10px; }
+        .page { page-break-after: always; display: flex; flex-wrap: wrap; justify-content: center; padding: 10mm; }
+        .qr-box { width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; margin: 5px; }
+        
+        @media print { 
+            button, textarea { display: none; }
+            body { margin: 10mm; } /* Margin atas, bawah, kiri, kanan */
+            size: legal portrait;
+        }
+    </style>
+</head>
+<body>
+    <h2>QR Code Generator & Print</h2>
+    <textarea id="codeInput" placeholder="Masukkan kode unik, pisahkan dengan baris baru..."></textarea><br>
+    <button onclick="generateQR()">Generate QR</button>
+    <button onclick="window.print()">Print</button>
+    <div id="qrContainer"></div>
+    
+    <script>
+        function generateQR() {
+            let container = document.getElementById("qrContainer");
+            container.innerHTML = ""; // Reset
+            let codes = document.getElementById("codeInput").value.trim().split("\n");
+            
+            let columnCount = 6;
+            let rowCount = 10;
+            let perPage = columnCount * rowCount;
+            
+            for (let i = 0; i < codes.length; i += perPage) {
+                let pageDiv = document.createElement("div");
+                pageDiv.className = "page";
+                
+                codes.slice(i, i + perPage).forEach(code => {
+                    if (code.trim()) {
+                        let qrDiv = document.createElement("div");
+                        qrDiv.className = "qr-box";
+                        new QRCode(qrDiv, { text: code.trim(), width: 100, height: 100 });
+                        pageDiv.appendChild(qrDiv);
+                    }
+                });
+                
+                container.appendChild(pageDiv);
+            }
+        }
+    </script>
+</body>
+</html>
