@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Komoditas</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; background: #f9fafb; color: #333; }
+    header { background: #2563eb; color: white; padding: 15px 25px; font-size: 18px; font-weight: bold; }
+    header small { display: block; font-size: 14px; font-weight: normal; margin-top: 4px; color: #e0e7ff; }
+    main { padding: 20px; max-width: 1200px; margin: auto; }
+    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); margin-bottom: 20px; }
+    label { font-weight: 600; margin-right: 10px; }
+    select { padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc; font-size: 14px; }
+    .analysis-cards { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 15px; }
+    .analysis-card { flex: 1; min-width: 250px; padding: 15px; border-radius: 10px; background: white; border: 1px solid #e5e7eb; }
+    .analysis-card h4 { margin: 0 0 8px 0; font-size: 15px; color: #111; }
+    .analysis-card p { margin: 0; font-size: 14px; }
+    .status-label { display: inline-block; padding: 4px 8px; border-radius: 6px; font-weight: bold; color: white; font-size: 13px; }
+    .status-red { background: #dc2626; }
+    .status-yellow { background: #eab308; color: #222; }
+    .status-green { background: #16a34a; }
+    .status-gray { background: #6b7280; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; border-radius: 8px; overflow: hidden; }
+    th, td { padding: 10px; text-align: center; }
+    th { background: #2563eb; color: white; font-weight: 600; }
+    tr:nth-child(even) { background: #f9fafb; }
+    tr:hover { background: #eef2ff; }
+
+    /* Loader */
+    .spinner {
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid #2563eb;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+    .loading-text {
+      text-align: center;
+      font-style: italic;
+      color: #555;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1;} 50% { opacity: 0.5;} }
+  </style>
+</head>
+<body>
+  <header id="pageHeader">
+    📊 Dashboard EWS SPH (andil ytd)
+    <small id="lastDataInfo">Sedang memuat data...</small>
+  </header>
+  <main>
+    <div class="card">
+      <h2>Grafik Harga Komoditas</h2>
+      <label for="commodity">Pilih Komoditas:</label>
+      <select id="commodity"></select>
+      <div id="chartLoader" class="spinner" style="display:none;"></div>
+      <canvas id="chart" height="100"></canvas>
+    </div>
+
+    <div class="card">
+      <h3>Analysis</h3>
+      <div class="analysis-cards" id="analysisCards"></div>
+    </div>
+
+    <div class="card">
+      <h3>Status Semua Komoditas</h3>
+      <div id="tableLoader" class="loading-text" style="display:none;">⏳ Memuat data...</div>
+      <table id="statusTable">
+        <thead>
+          <tr>
+            <th>Komoditas</th>
+            <th>Status Terakhir</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script>
+    const ctx = document.getElementById('chart').getContext('2d');
+    let chart;
+
+    const commodityList = [
+      "Beras","Minyak Goreng","Daging Sapi","Daging Ayam Ras","Telur Ayam Ras",
+      "Cabai Merah","Cabai Rawit","Bawang Merah","Bawang Putih","IKAN KEMBUNG",
+      "Gula Pasir","IKAN TONGKOL","Angkutan Udara","Udang Basah"
+    ];
+
+    const selectEl = document.getElementById("commodity");
+    commodityList.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c;
+      opt.textContent = c;
+      selectEl.appendChild(opt);
+    });
+
+    async function fetchCommodityData(commodity) {
+      const url = `https://script.google.com/macros/s/AKfycbxlw8Vgi6g9tm9gdlpXpeNCbShOkWW-V1l6Rq1kINscL19bUprIMeZ3k-posFUlXupq/exec?pb=a&sheet=${encodeURIComponent(commodity)}`;
+      const res = await fetch(url);
+      return res.json();
+    }
+
+    function getStatus(data) {
+      const realisasiMinggu = data.map(d => d.realisasiMinggu ?? null);
+      const merah = data.map(d => d.merah ?? null);
+      const kuning = data.map(d => d.kuning ?? null);
+      const hijau = data.map(d => d.hijau ?? null);
+
+      const lastValidIdx = [...realisasiMinggu].map((v,i)=>v!==null?i:null).filter(v=>v!==null).pop();
+      if (lastValidIdx === undefined) return { text: "❌ Tidak ada data", level: "gray", value: null, tanggal:null };
+
+      const lastVal = realisasiMinggu[lastValidIdx];
+      const tanggal = data[lastValidIdx].tanggal;
+
+      if (lastVal > merah[0]) return { text: `Melewati MERAH (${lastVal.toFixed(3)})`, level: "red", value: lastVal, tanggal };
+      if (lastVal > kuning[0]) return { text: `Melewati KUNING (${lastVal.toFixed(3)})`, level: "yellow", value: lastVal, tanggal };
+      if (lastVal > hijau[0]) return { text: `Melewati HIJAU (${lastVal.toFixed(3)})`, level: "green", value: lastVal, tanggal };
+      return { text: `Di bawah HIJAU (${lastVal.toFixed(3)})`, level: "gray", value: lastVal, tanggal };
+    }
+
+    function renderAnalysis(data) {
+      const container = document.getElementById("analysisCards");
+      container.innerHTML = "";
+
+      const realisasi = data.map(d => d.realisasi ?? null);
+      const realisasiMinggu = data.map(d => d.realisasiMinggu ?? null);
+
+      const lastIdx = realisasiMinggu.map((v,i)=>v!==null?i:null).filter(v=>v!==null).pop();
+      const lastVal = lastIdx !== undefined ? realisasiMinggu[lastIdx] : null;
+      const prevVal = (lastIdx && lastIdx>0) ? realisasiMinggu[lastIdx-1] : null;
+      const lastRealisasi = [...realisasi].reverse().find(v => v!==null);
+
+      let compWeekText = "Tidak ada data perbandingan";
+      if (lastVal!==null && prevVal!==null) {
+        const diff = lastVal - prevVal;
+        const pct = ((diff/prevVal)*100).toFixed(2);
+        if (diff>0) compWeekText = `📈 Naik ${diff.toFixed(2)} dibanding minggu sebelumnya`;
+        else if (diff<0) compWeekText = `📉 Turun ${Math.abs(diff).toFixed(2)} dibanding minggu sebelumnya`;
+        else compWeekText = "➖ Stabil dibanding minggu sebelumnya";
+      }
+
+      let compDailyText = "Tidak ada data realisasi";
+      if (lastVal!==null && lastRealisasi!==null) {
+        const diff = lastVal - lastRealisasi;
+        const pct = ((diff/lastRealisasi)*100).toFixed(2);
+        if (diff>0) compDailyText = `⬆️ Lebih tinggi ${diff.toFixed(2)} dibanding realisasi terakhir`;
+        else if (diff<0) compDailyText = `⬇️ Lebih rendah ${Math.abs(diff).toFixed(2)} dibanding realisasi terakhir`;
+        else compDailyText = "➖ Sama dengan realisasi terakhir";
+      }
+
+      const status = getStatus(data);
+      let indikatorHtml = `<span class="status-label status-${status.level}">${status.text}</span>`;
+      if (lastVal!==null && prevVal!==null) {
+        const diff = lastVal - prevVal;
+        const pct = ((diff/prevVal)*100).toFixed(2);
+        indikatorHtml += `<br><small>Perubahan dari minggu lalu: ${diff>0? "📈":"📉"} ${diff.toFixed(2)} </small>`;
+      }
+
+      const cards = [
+        { title: "Minggu vs Minggu Sebelumnya", text: compWeekText },
+        { title: "Minggu vs Realisasi Terakhir", text: compDailyText },
+        { title: "Indikator", text: indikatorHtml }
+      ];
+
+      cards.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "analysis-card";
+        div.innerHTML = `<h4>${c.title}</h4><p>${c.text}</p>`;
+        container.appendChild(div);
+      });
+    }
+
+    async function loadData(commodity = "Beras") {
+      document.getElementById("chartLoader").style.display = "block"; 
+      if (chart) chart.destroy();
+      try {
+        const data = await fetchCommodityData(commodity);
+
+        // Update header dengan data terakhir sebelum null
+        const realisasiMinggu = data.map(d => d.realisasiMinggu ?? null);
+        const lastIdx = [...realisasiMinggu].map((v,i)=>v!==null?i:null).filter(v=>v!==null).pop();
+        if (lastIdx !== undefined) {
+          const tanggal = data[lastIdx].tanggal;
+          const nilai = realisasiMinggu[lastIdx].toFixed(3);
+          document.getElementById("lastDataInfo").textContent = `Data terakhir (${commodity}): ${tanggal} = ${nilai}`;
+        } else {
+          document.getElementById("lastDataInfo").textContent = `Data terakhir (${commodity}): tidak tersedia`;
+        }
+
+        const labels = data.map(d => d.tanggal);
+        const andil = data.map(d => d.andilTahunLalu ?? null);
+        const realisasi = data.map(d => d.realisasi ?? null);
+        const merah = data.map(d => d.merah ?? null);
+        const kuning = data.map(d => d.kuning ?? null);
+        const hijau = data.map(d => d.hijau ?? null);
+
+        renderAnalysis(data);
+
+        chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [
+              { label: 'Andil Tahun Lalu', data: andil, borderColor: '#aaa', fill: false },
+              { label: 'Realisasi', data: realisasi, borderColor: 'blue', fill: false },
+              { label: 'Realisasi Mingguan', data: realisasiMinggu, borderColor: 'blue', borderDash: [3, 3], fill: false, pointBackgroundColor: 'blue' },
+              { label: 'Merah', data: merah, borderColor: 'red', fill: false },
+              { label: 'Kuning', data: kuning, borderColor: 'gold', fill: false },
+              { label: 'Hijau', data: hijau, borderColor: 'green', fill: false },
+            ]
+          },
+          options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+        });
+      } finally {
+        document.getElementById("chartLoader").style.display = "none"; 
+      }
+    }
+
+    async function loadStatusTable() {
+      const tbody = document.querySelector("#statusTable tbody");
+      tbody.innerHTML = "";
+      document.getElementById("tableLoader").style.display = "block"; 
+      for (const komoditas of commodityList) {
+        try {
+          const data = await fetchCommodityData(komoditas);
+          const status = getStatus(data);
+          const row = `<tr><td>${komoditas}</td><td><span class="status-label status-${status.level}">${status.text}</span></td></tr>`;
+          tbody.insertAdjacentHTML("beforeend", row);
+        } catch (e) {
+          const row = `<tr><td>${komoditas}</td><td>⚠️ Error mengambil data</td></tr>`;
+          tbody.insertAdjacentHTML("beforeend", row);
+        }
+      }
+      document.getElementById("tableLoader").style.display = "none"; 
+    }
+
+    selectEl.addEventListener("change", (e) => loadData(e.target.value));
+
+    loadData();
+    loadStatusTable();
+  </script>
+</body>
+</html>
